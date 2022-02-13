@@ -1,0 +1,3 @@
+#!/bin/bash
+
+deno compile --allow-read --allow-env --output ./bin/resolve_node_version ./resolve_node_version.ts
