@@ -26,6 +26,16 @@ nvm() {
   nvm $@
 }
 
+# Strips the path of previous nvm node directories
+nvm_strip_path() {
+  command printf %s "${1-}" | command awk -v NVM_DIR="${NVM_DIR}" -v RS=: '
+  index($0, NVM_DIR) == 1 {
+    path = substr($0, length(NVM_DIR) + 1)
+    if (path ~ "^(/versions/[^/]*)?/[^/]*'"${2-}"'.*$") { next }
+  }
+  { print }' | command paste -s -d: -
+}
+
 # Resolves node version based on nearest nvmrc and adds its directory to the PATH
 load-nvmrc() {
   NODE_PATH=$(${NVM_DIR}/resolve_node_version)
