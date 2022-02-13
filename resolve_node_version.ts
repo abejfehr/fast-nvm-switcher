@@ -1,11 +1,17 @@
-import { dirname, fromFileUrl, join } from "https://deno.land/std/path/mod.ts";
+import { dirname, join } from "https://deno.land/std/path/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import * as semver from "https://deno.land/x/semver/mod.ts";
 
 // this program's whole purpose is to just output to stdout the path to the node version to the shell can put it on the path
 
-const getNpmrcPath = () => {
-  let pwd = dirname(fromFileUrl(import.meta.url));
+const getNvmrcPath = () => {
+  let pwd = Deno.cwd();
+
+  let nvmrcPath = join(pwd, '.nvmrc');
+
+  if (existsSync(nvmrcPath)) {
+    return nvmrcPath;
+  }
 
   while (pwd !== '/') {
     pwd = dirname(pwd); // goes up one
@@ -40,12 +46,12 @@ const getNodePath = async (version: string) => {
 }
 
 const main = async () => {
-  const npmrcPath = getNpmrcPath();
+  const nvmrcPath = getNvmrcPath();
 
   let version: string | undefined;
 
-  if (npmrcPath) {
-    version = await Deno.readTextFile(npmrcPath);
+  if (nvmrcPath) {
+    version = await Deno.readTextFile(nvmrcPath);
   }
 
   if (!version) {
