@@ -191,8 +191,10 @@ nvm_strip_path() {
 # Resolves node version based on nearest nvmrc and adds its directory to the PATH
 load-nvmrc() {
   NODE_PATH=$(${NVM_DIR}/resolve_node_version)
-  echo "Updating node location to $NODE_PATH"
-  PATH="$PATH:$NODE_PATH"
+  if [ -n "$NODE_PATH" ]; then
+    echo "Updating node location to $NODE_PATH"
+    PATH="$PATH:$NODE_PATH"
+  fi
 }
 
 autoload -U add-zsh-hook
