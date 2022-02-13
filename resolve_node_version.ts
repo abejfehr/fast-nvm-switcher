@@ -2,7 +2,14 @@ import { dirname, join } from "https://deno.land/std/path/mod.ts";
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import * as semver from "https://deno.land/x/semver/mod.ts";
 
-// this program's whole purpose is to just output to stdout the path to the node version to the shell can put it on the path
+/**
+ * resolve_node_version
+ *
+ * This program does the following:
+ * 1. Walks up the directory to find the nearest .nvmrc
+ * 2. Determine if that version of node is installed with nvm
+ * 3. Output the path to that version of node so that the shell script can set it to $PATH
+ */
 
 const getNvmrcPath = () => {
   let pwd = Deno.cwd();
@@ -38,7 +45,7 @@ const getNodePath = async (version: string) => {
   const resolvedVersion = semver.maxSatisfying(versions, `${isFuzzyVersion ? '^' : ''}${version}`);
 
   if (!resolvedVersion) {
-    console.error("Unable to find node version that matches, please run 'nvm install'");
+    console.error(`Unable to find node version that matches ${version}, please run 'nvm install'`);
     Deno.exit(1);
   }
 
