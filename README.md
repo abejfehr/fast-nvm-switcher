@@ -132,7 +132,7 @@ num  calls                time                       self            name
 
 ### With "fast nvm switcher"
 
-The output is always on the order of tens of milliseconds, with hundreds of milliseconds being the longest possible time.
+The output is always on the order of ~10ms.
 
 <details>
 
@@ -141,16 +141,16 @@ The output is always on the order of tens of milliseconds, with hundreds of mill
 ```
 num  calls                time                       self            name
 -----------------------------------------------------------------------------------
- 1)    1         119.36   119.36   99.36%    119.36   119.36   99.36%  load-nvmrc
- 2)    1           0.77     0.77    0.64%      0.77     0.77    0.64%  add-zsh-hook
+ 1)    1           7.77     7.77   94.53%      7.77     7.77   94.53%  load-nvmrc
+ 2)    1           0.45     0.45    5.47%      0.45     0.45    5.47%  add-zsh-hook
 
 -----------------------------------------------------------------------------------
 
- 1)    1         119.36   119.36   99.36%    119.36   119.36   99.36%  load-nvmrc
+ 1)    1           7.77     7.77   94.53%      7.77     7.77   94.53%  load-nvmrc
 
 -----------------------------------------------------------------------------------
 
- 2)    1           0.77     0.77    0.64%      0.77     0.77    0.64%  add-zsh-hook
+ 2)    1           0.45     0.45    5.47%      0.45     0.45    5.47%  add-zsh-hook
 ```
 
 </details>
@@ -164,7 +164,7 @@ If you already have nvm installed, remove anything nvm-related you might already
 Next, run the following script to download the `resolve_node_version` binary to your machine:
 
 ```sh
-(cd $HOME/.nvm/ && curl -L -O https://github.com/abejfehr/fast-nvm-switcher/releases/download/0.1.1/resolve_node_version)
+(cd $HOME/.nvm/ && curl -L -O https://github.com/abejfehr/fast-nvm-switcher/releases/download/0.1.2/resolve_node_version)
 ```
 
 Add the following lines to your .zshrc

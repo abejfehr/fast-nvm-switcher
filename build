@@ -1,3 +1,5 @@
 #!/bin/bash
 
-deno compile --allow-read --allow-env --output ./bin/resolve_node_version ./resolve_node_version.ts
+# deno compile --allow-read --allow-env --output ./bin/resolve_node_version ./resolve_node_version.ts
+
+go build -o ./bin resolve_node_version.go
