@@ -164,7 +164,7 @@ If you already have nvm installed, remove anything nvm-related you might already
 Next, run the following script to download the `resolve_node_version` binary to your machine:
 
 ```sh
-(cd $HOME/.nvm/ && curl -L -O https://github.com/abejfehr/fast-nvm-switcher/releases/download/0.1.2/resolve_node_version)
+(cd $HOME/.nvm/ && curl -L -O https://github.com/abejfehr/fast-nvm-switcher/releases/download/0.1.3/resolve_node_version)
 ```
 
 Add the following lines to your .zshrc

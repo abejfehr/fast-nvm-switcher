@@ -51,7 +51,7 @@ func get_node_path(_version string) string {
   version := strings.Trim(_version, "\n");
   version = "v" + strings.Trim(version, "v");
 
-  is_fuzzy_version := !semver.IsValid(version);
+  is_fuzzy_version := !strings.Contains(version, ".");
 
   files, err := ioutil.ReadDir(os.Getenv("NVM_DIR") + "/versions/node/")
   if err != nil {
@@ -74,7 +74,7 @@ func get_node_path(_version string) string {
   }
 
   for _, v := range versions {
-    if (is_fuzzy_version) {
+    if (!is_fuzzy_version) {
       if (v == version) {
         resolved_version = v;
         break;
