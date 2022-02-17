@@ -1,6 +1,6 @@
 # ⚡️ Fast nvm switcher
 
-Is your nvm slow? This repository provides some suggestions for speeding up nvm in your shell.
+Is your nvm slow? This repository provides some suggestions (and a utility) for speeding up nvm in your shell.
 
 ## Speeding up a basic installation
 
@@ -32,7 +32,7 @@ function nvm() {
 For the zsh shell hook that automatically switches node versions on directory change, you can simply start by downloading the `resolve_node_version` binary to your `.nvm` folder:
 
 ```bash
-(cd $HOME/.nvm/ && curl -L -O https://github.com/abejfehr/fast-nvm-switcher/releases/download/0.1.3/resolve_node_version && chmod +x $HOME/.nvm/resolve_node_version)
+curl -o- https://raw.githubusercontent.com/abejfehr/fast-nvm-switcher/v0.1.4/install.sh | bash
 ```
 
 And add a relatively small hook into your `.zshrc` file:
