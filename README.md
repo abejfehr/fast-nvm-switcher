@@ -32,7 +32,7 @@ function nvm() {
 For the zsh shell hook that automatically switches node versions on directory change, you can simply start by downloading the `resolve_node_version` binary to your `.nvm` folder:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/abejfehr/fast-nvm-switcher/v0.1.5/install.sh | bash
+curl -o- https://raw.githubusercontent.com/abejfehr/fast-nvm-switcher/v0.1.6/install.sh | bash
 ```
 
 And follow the instructions given.

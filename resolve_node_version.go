@@ -16,9 +16,11 @@ import (
  *
  * This program does the following:
  * 1. Walks up the directory to find the nearest .nvmrc
- * 2. Determine if that version of node is installed with nvm
- * 3. Output the path to that version of node so that the shell script can set it to $PATH
+ * 2. Determine if that node version is installed with nvm
+ * 3. Output a $PATH value updated with the resolved node version for the shell integration to set
  */
+
+var nvm_dir string = os.Getenv("NVM_DIR")
 
 func get_nvmrc_path() string {
 	pwd, err := os.Getwd()
@@ -53,7 +55,7 @@ func get_node_path(_version string) string {
 
 	is_fuzzy_version := !strings.Contains(version, ".")
 
-	files, err := ioutil.ReadDir(os.Getenv("NVM_DIR") + "/versions/node/")
+	files, err := ioutil.ReadDir(nvm_dir + "/versions/node/")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -92,7 +94,20 @@ func get_node_path(_version string) string {
 		os.Exit(1)
 	}
 
-	return os.Getenv("NVM_DIR") + "/versions/node/" + resolved_version + "/bin"
+	return nvm_dir + "/versions/node/" + resolved_version + "/bin"
+}
+
+func prepend_to_path(path string) string {
+	_paths := strings.Split(os.Getenv("PATH"), ":")
+	paths := []string{path}
+
+	for _, p := range _paths {
+		if !strings.Contains(p, nvm_dir) {
+			paths = append(paths, p)
+		}
+	}
+
+	return strings.Join(paths, ":")
 }
 
 func main() {
@@ -106,12 +121,12 @@ func main() {
 	}
 
 	if version == "" {
-		// Get the nvm "default" alias
-		value, _ := os.ReadFile(os.Getenv("NVM_DIR") + "/alias/default")
+		// Read the nvm "default" alias
+		value, _ := os.ReadFile(nvm_dir + "/alias/default")
 		version = string(value)
 	}
 
 	node_path := get_node_path(version)
 
-	fmt.Println(node_path)
+	fmt.Println(prepend_to_path(node_path))
 }
