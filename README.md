@@ -44,5 +44,4 @@ Once you've complete that, changing directories should now also be blazing fast 
 ## Limitations
 
 - This script only supports the 'default' alias, it won't work with 'lts' or other custom aliases
-- The install snippet assumes that you're using the default `$NVM_DIR` of `$HOME/.nvm`
 - The `resolve_node_version` utility does not update the `$MANPATH` environment variable
